@@ -13,11 +13,6 @@ class ControlController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let tabBarItem = UITabBarItem()
-//        tabBarItem.title = "Control"
-//        tabBarItem.image = #imageLiteral(resourceName: "control")
-//        self.tabBarItem = tabBarItem
-        
         let label = UILabel()
         label.text = "This is control controller."
         label.backgroundColor = .purple
@@ -28,15 +23,4 @@ class ControlController: BaseController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

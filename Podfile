@@ -6,6 +6,11 @@ target 'GR-Helper' do
   use_frameworks!
 
   # Pods for GR-Helper
+  pod 'Alamofire', '~> 5.0.0-rc.2'
+  pod 'JGProgressHUD'
+
+
+
 
   target 'GR-HelperTests' do
     inherit! :search_paths

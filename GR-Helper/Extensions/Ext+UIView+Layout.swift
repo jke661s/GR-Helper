@@ -8,6 +8,10 @@
 
 import UIKit
 
+let screenSize = UIScreen.main.bounds
+let screenWidth = screenSize.width
+let screenHeight = screenSize.height
+
 extension UIView {
     
     @discardableResult
@@ -30,7 +34,7 @@ extension UIView {
         }
         
         if let trailing = trailing {
-            anchoredConstraint.trailing = trailing.constraint(equalTo: trailing, constant: padding.right)
+            anchoredConstraint.trailing = trailingAnchor.constraint(equalTo: trailing, constant: padding.right)
         }
         
         if size.height != 0 {
@@ -41,7 +45,7 @@ extension UIView {
             anchoredConstraint.width = widthAnchor.constraint(equalToConstant: size.width)
         }
         
-        [anchoredConstraint.top, anchoredConstraint.leading, anchoredConstraint.bottom, anchoredConstraint.leading, anchoredConstraint.width, anchoredConstraint.height].forEach({ $0?.isActive = true})
+        [anchoredConstraint.top, anchoredConstraint.leading, anchoredConstraint.bottom, anchoredConstraint.trailing, anchoredConstraint.width, anchoredConstraint.height].forEach({ $0?.isActive = true})
         
         return anchoredConstraint
     }

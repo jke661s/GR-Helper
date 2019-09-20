@@ -13,12 +13,6 @@ class ProfileController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let tabBarItem = UITabBarItem()
-//        tabBarItem.title = "Profile"
-//        
-//        tabBarItem.image = #imageLiteral(resourceName: "profile")
-//        self.tabBarItem = tabBarItem
-        
         let label = UILabel()
         label.text = "This is profile controller."
         label.backgroundColor = .yellow
