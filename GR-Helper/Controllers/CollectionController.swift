@@ -7,10 +7,15 @@
 //
 
 import UIKit
-//import SystemConfiguration.CaptiveNetwork
 import JGProgressHUD
 
 class CollectionController: BaseController {
+    
+    // Configuration
+    fileprivate let numberOfCellInRow: CGFloat = 4
+    fileprivate let minInteritemSpacing: CGFloat = 1
+    fileprivate let sectionInset = UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
+    fileprivate let minLineSpacing: CGFloat = 1
     
     // UI Components
     private let label: UILabel = {
@@ -20,51 +25,51 @@ class CollectionController: BaseController {
         label.font = UIFont.systemFont(ofSize: 32)
         return label
     }()
-    
     private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    let imageView = UIImageView()
+    imageView.contentMode = .scaleAspectFit
+    return imageView
+}()
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionHeadersPinToVisibleBounds = true
+        layout.minimumInteritemSpacing = minInteritemSpacing
+        layout.minimumLineSpacing = minLineSpacing
+        layout.sectionInset = sectionInset
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return cv
     }()
-    
-    private let collectionView =  UICollectionView(frame: .zero, collectionViewLayout: .init())
     // View Model
     private let collectionViewModel = CollectionViewModel()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupCollectionView()
         setupLayout()
-        setupViewModelObserver()
-        checkConnection()
-        
     }
     
-    // MARK:- private functions
-    private func checkConnection() {
-        collectionViewModel.checkCameraConnection { [weak self] (data, json, err) in
-            guard let self =  self else { return }
-            if let err = err {
-                let noConnectionView = NoConnectionView()
-                self.view.addSubview(noConnectionView)
-                noConnectionView.setConstraints(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor)
-                print(err)
-                return
-            }
-            if let json = json {
-                self.collectionViewModel.objectModel = ObjectModel(dic: json)
-            }
+    override func viewWillAppear(_ animated: Bool) {
+        collectionViewModel.bindableIsRicohWifiConnected.value! ? getPhotoList() : displayConnectionErrorDialog()
+    }
+    
+    // MARK: - private functions
+    fileprivate func displayConnectionErrorDialog() {
+        let noConnectionView = NoConnectionView()
+        self.view.addSubview(noConnectionView)
+        noConnectionView.setConstraints(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor)
+    }
+    
+    private func getPhotoList() {
+        collectionViewModel.getPhotoList { [weak self] (data, json, err) in
+            guard let self = self, let json = json else { return }
+            self.collectionViewModel.objectModel = ObjectModel(dic: json)
+            self.collectionView.reloadData()
         }
     }
     
-    private func setupViewModelObserver() {
-        collectionViewModel.bindablePhotoList.bind { [weak self] (photoList) in
-            guard let self = self, let photoList = photoList else { return }
-            photoList.forEach({print("Path is \($0.path), time is \($0.time)")})
-        }
-        
-        
+    fileprivate func setupCollectionView() {
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.cellId)
+        collectionView.register(PhotoHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PhotoHeaderView.headerId)
     }
     
     private func setupLayout() {
@@ -72,6 +77,7 @@ class CollectionController: BaseController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
+        collectionView.contentInset = .init(top: 8, left: 0, bottom: 0, right: 0)
         collectionView.setConstraints(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
     }
     
@@ -79,22 +85,38 @@ class CollectionController: BaseController {
 
 extension CollectionController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    // MARK: Delegate
+    // Set cell size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = (view.frame.width - sectionInset.left - sectionInset.right - minInteritemSpacing * (numberOfCellInRow - 1) ) / numberOfCellInRow
+        return .init(width: cellWidth, height: cellWidth)
+    }
+    
+    // Set header size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: 50, height: 20)
+    }
+    
+    // MARK: Data source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 500
+        return collectionViewModel.groupedPhotoList[section].count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return collectionViewModel.groupedPhotoList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PhotoHeaderView.headerId, for: indexPath) as! PhotoHeaderView
+        headerView.label.text = collectionViewModel.groupedPhotoList[indexPath.section].first?.time ?? "N/A"
+        return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = UICollectionViewCell()
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.cellId, for: indexPath) as! PhotoCell
+        cell.photoCellViewModel.path = collectionViewModel.groupedPhotoList[indexPath.section][indexPath.item].path
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 50, height: 50)
-    }
+
     
 }

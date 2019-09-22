@@ -25,7 +25,11 @@ class MainTabBarController: UITabBarController {
         profileController.tabBarItem.title = "Profile"
         profileController.tabBarItem.image = UIImage(named: "profile")
         
-        viewControllers = [collectionController, controlController, profileController]
+        viewControllers = [UINavigationController(rootViewController: collectionController) ,UINavigationController(rootViewController: controlController) ,UINavigationController(rootViewController: profileController) ]
+    }
+    
+    func test() {
+        
     }
     
 }

@@ -8,6 +8,7 @@ target 'GR-Helper' do
   # Pods for GR-Helper
   pod 'Alamofire', '~> 5.0.0-rc.2'
   pod 'JGProgressHUD'
+  pod 'SDWebImage', '~> 5.0'
 
 
 

@@ -14,7 +14,7 @@ class WebService {
     static let shared = WebService()
     // Configuration
     private var manager: Session!
-    private let timeoutInterval: TimeInterval = 2
+    private let timeoutInterval: TimeInterval = 5
     
     private init() {
         let configuration = URLSessionConfiguration.default
@@ -28,8 +28,11 @@ class WebService {
             print("Session does not exist.")
             return
         }
-        
+        print("heihei")
         manager.request(url, method: method, parameters: params).response { (response) in
+            print("here i am")
+            print("Status code: ",response.response?.statusCode)
+
             switch response.result {
             case .success(let data):
                 guard let data = data else {

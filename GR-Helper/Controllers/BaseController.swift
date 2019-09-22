@@ -10,6 +10,9 @@ import UIKit
 
 class BaseController: UIViewController {
     
+    // View controller
+    fileprivate let baseViewModel = BaseViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

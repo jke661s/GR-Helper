@@ -26,7 +26,7 @@ class NoConnectionView: UIView {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.text = "No camera connection. Please go to settings to connect."
+        label.text = "No camera connection. Please go to settings to connect. The camera Wi-Fi name starts with \"RICOH_\""
         label.numberOfLines = 0
         return label
     }()
@@ -34,6 +34,7 @@ class NoConnectionView: UIView {
     private let button: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Go to settings", for: .normal)
+        button.addTarget(self, action: #selector(handleGoToSettings), for: .touchUpInside)
         return button
     }()
     
@@ -54,11 +55,16 @@ class NoConnectionView: UIView {
         
         button.setConstraints(top: label.bottomAnchor, leading: nil, bottom: contentView.bottomAnchor, trailing: nil, padding: .init(top: 15, left: 0, bottom: -15, right: 0))
         button.centerX(to: contentView)
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Fileprivate functions
+    @objc fileprivate func handleGoToSettings() {
+        guard let url = URL(string: "App-Prefs:root=WIFI") else { return }
+        let app = UIApplication.shared
+        app.open(url, options: [:], completionHandler: nil)
     }
 }

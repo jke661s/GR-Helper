@@ -14,6 +14,13 @@
 		C45A5482232E165E0053ACB3 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45A5481232E165E0053ACB3 /* CollectionViewModel.swift */; };
 		C45A5484232E16B70053ACB3 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45A5483232E16B70053ACB3 /* Bindable.swift */; };
 		C45A5486232E53400053ACB3 /* ObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45A5485232E53400053ACB3 /* ObjectModel.swift */; };
+		C46D25152335FB1F0036D006 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46D25142335FB1F0036D006 /* PhotoCell.swift */; };
+		C46D25182335FB620036D006 /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46D25172335FB620036D006 /* PhotoHeaderView.swift */; };
+		C4BED692233653650088ACED /* PhotoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BED691233653650088ACED /* PhotoCellViewModel.swift */; };
+		C4BED6942336538A0088ACED /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BED6932336538A0088ACED /* PhotoModel.swift */; };
+		C4BED696233658980088ACED /* PhotoWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BED695233658980088ACED /* PhotoWebService.swift */; };
+		C4BED6982336F88A0088ACED /* PingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BED6972336F88A0088ACED /* PingModel.swift */; };
+		C4BED69A2336FDD80088ACED /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BED6992336FDD80088ACED /* BaseViewModel.swift */; };
 		C4C3D7B2232CA6E1004871F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3D7B1232CA6E1004871F9 /* AppDelegate.swift */; };
 		C4C3D7B4232CA6E1004871F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3D7B3232CA6E1004871F9 /* ViewController.swift */; };
 		C4C3D7B7232CA6E1004871F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C3D7B5232CA6E1004871F9 /* Main.storyboard */; };
@@ -63,6 +70,13 @@
 		C45A5481232E165E0053ACB3 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		C45A5483232E16B70053ACB3 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		C45A5485232E53400053ACB3 /* ObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectModel.swift; sourceTree = "<group>"; };
+		C46D25142335FB1F0036D006 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		C46D25172335FB620036D006 /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
+		C4BED691233653650088ACED /* PhotoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCellViewModel.swift; sourceTree = "<group>"; };
+		C4BED6932336538A0088ACED /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		C4BED695233658980088ACED /* PhotoWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWebService.swift; sourceTree = "<group>"; };
+		C4BED6972336F88A0088ACED /* PingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingModel.swift; sourceTree = "<group>"; };
+		C4BED6992336FDD80088ACED /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		C4C3D7AE232CA6E1004871F9 /* GR-Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GR-Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C3D7B1232CA6E1004871F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4C3D7B3232CA6E1004871F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				C45A547B232DAC470053ACB3 /* WebService.swift */,
+				C4BED695233658980088ACED /* PhotoWebService.swift */,
 			);
 			path = "Web Service";
 			sourceTree = "<group>";
@@ -143,7 +158,8 @@
 		C45A547D232DC4C40053ACB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C45A547E232DC4EC0053ACB3 /* NoConnectionView.swift */,
+				C46D25162335FB4F0036D006 /* UIViews */,
+				C46D25132335FB100036D006 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,10 +167,29 @@
 		C45A5480232E16450053ACB3 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				C4BED691233653650088ACED /* PhotoCellViewModel.swift */,
 				C45A5481232E165E0053ACB3 /* CollectionViewModel.swift */,
 				C45A5483232E16B70053ACB3 /* Bindable.swift */,
+				C4BED6992336FDD80088ACED /* BaseViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		C46D25132335FB100036D006 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C46D25142335FB1F0036D006 /* PhotoCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C46D25162335FB4F0036D006 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				C46D25172335FB620036D006 /* PhotoHeaderView.swift */,
+				C45A547E232DC4EC0053ACB3 /* NoConnectionView.swift */,
+			);
+			path = UIViews;
 			sourceTree = "<group>";
 		};
 		C4C3D7A5232CA6E1004871F9 = {
@@ -243,6 +278,8 @@
 			children = (
 				C4C3D7F1232CB901004871F9 /* AnchoredConstraint.swift */,
 				C45A5485232E53400053ACB3 /* ObjectModel.swift */,
+				C4BED6932336538A0088ACED /* PhotoModel.swift */,
+				C4BED6972336F88A0088ACED /* PingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,8 +368,11 @@
 					C4C3D7AD232CA6E1004871F9 = {
 						CreatedOnToolsVersion = 10.2;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -423,6 +463,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-GR-Helper/Pods-GR-Helper-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -430,6 +471,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -510,12 +552,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C45A547C232DAC470053ACB3 /* WebService.swift in Sources */,
+				C4BED69A2336FDD80088ACED /* BaseViewModel.swift in Sources */,
 				C45A5486232E53400053ACB3 /* ObjectModel.swift in Sources */,
 				C4C3D7EA232CB78B004871F9 /* ProfileController.swift in Sources */,
 				C45A5482232E165E0053ACB3 /* CollectionViewModel.swift in Sources */,
+				C46D25152335FB1F0036D006 /* PhotoCell.swift in Sources */,
+				C4BED6942336538A0088ACED /* PhotoModel.swift in Sources */,
+				C4BED6982336F88A0088ACED /* PingModel.swift in Sources */,
 				C4C3D7B4232CA6E1004871F9 /* ViewController.swift in Sources */,
 				C4C3D7B2232CA6E1004871F9 /* AppDelegate.swift in Sources */,
 				C4C3D7E4232CB741004871F9 /* MainTabBarController.swift in Sources */,
+				C4BED696233658980088ACED /* PhotoWebService.swift in Sources */,
 				C45A547F232DC4EC0053ACB3 /* NoConnectionView.swift in Sources */,
 				C4C3D7F4232CB998004871F9 /* Ext+UIView+Layout.swift in Sources */,
 				C45A5484232E16B70053ACB3 /* Bindable.swift in Sources */,
@@ -524,6 +571,8 @@
 				C4C3D7EC232CB7B8004871F9 /* BaseController.swift in Sources */,
 				C4C3D7BA232CA6E1004871F9 /* GR_Helper.xcdatamodeld in Sources */,
 				C4C3D7EE232CB804004871F9 /* ControlController.swift in Sources */,
+				C4BED692233653650088ACED /* PhotoCellViewModel.swift in Sources */,
+				C46D25182335FB620036D006 /* PhotoHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +748,7 @@
 			baseConfigurationReference = 4F3EC94BC18425A130C584C5 /* Pods-GR-Helper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "GR-Helper/GR-Helper.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 274245Q59F;
 				INFOPLIST_FILE = "GR-Helper/Info.plist";
@@ -719,6 +769,7 @@
 			baseConfigurationReference = D4C098446C7D24D1F96DBBE4 /* Pods-GR-Helper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "GR-Helper/GR-Helper.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 274245Q59F;
 				INFOPLIST_FILE = "GR-Helper/Info.plist";
